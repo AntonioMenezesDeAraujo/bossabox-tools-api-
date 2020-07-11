@@ -1,6 +1,6 @@
 module.exports = {
     dialect: 'postgres',
-    host: 'postgresql-slippery-22976',
+    host: 'localhost',
     username: 'postgres',
     password: 'postgres',
     database: 'desafio_bossa_box',
