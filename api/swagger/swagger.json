@@ -44,25 +44,25 @@
                 "type": "string",
                 "example": "Eclipse"
             },
-
             "link": {
                 "type": "string",
                 "description": "link tools",
                 "example": "www.eclipse.com"
             },
-
             "description": {
                 "type": "string",
                 "description": "description of the tool",
                 "example": "JAVA develoments tools"
             },
-
             "tags": {
                 "type": "array",
                 "description": "array tags",
-                "example": ["Eclipse", "Android Studio", "visual Studio Code"]
+                "example": [
+                    "Eclipse",
+                    "Android Studio",
+                    "visual Studio Code"
+                ]
             },
-
             "Tool": {
                 "type": "object",
                 "properties": {
@@ -91,7 +91,7 @@
                 "tags": [
                     "CRUD operations"
                 ],
-                "description": "Get tools",
+                "description": "Find All Tools",
                 "operationId": "tools",
                 "responses": {
                     "200": {
@@ -105,7 +105,7 @@
                         }
                     },
                     "400": {
-                        "description": "Missing parameters",
+                        "description": "Not found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -117,6 +117,58 @@
                                 }
                             }
                         }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "CRUD operations"
+                ],
+                "description": "Create tools",
+                "operationId": "createtools",
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Tool"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "New tools were created"
+                    },
+                    "400": {
+                        "description": "Invalid parameters"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "CRUD operations"
+                ],
+                "description": "Delete tools",
+                "operationId": "deletetools",
+                "parameters": [
+                    {
+                        "id": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        },
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Invalid parameters"
                     }
                 }
             }
