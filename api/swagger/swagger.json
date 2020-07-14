@@ -1,0 +1,125 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "version": "1.3.0",
+        "title": "Tools",
+        "description": "Tools management API",
+        "contact": {
+            "name": "Antonio Menezes",
+            "email": "antoniomenezes20@gmail.com",
+            "url": "antoniomenezes20@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000/",
+            "description": "Local server"
+        },
+        {
+            "url": "http://localhost:3000/",
+            "description": "Testing server"
+        },
+        {
+            "url": "https://bossabox-tools-api.herokuapp.com/",
+            "description": "Production server"
+        }
+    ],
+    "tags": [
+        {
+            "name": "CRUD operations"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "id": {
+                "type": "bigint",
+                "description": "Tools identification number",
+                "example": 1
+            },
+            "title": {
+                "type": "string",
+                "example": "Eclipse"
+            },
+
+            "link": {
+                "type": "string",
+                "description": "link tools",
+                "example": "www.eclipse.com"
+            },
+
+            "description": {
+                "type": "string",
+                "description": "description of the tool",
+                "example": "JAVA develoments tools"
+            },
+
+            "tags": {
+                "type": "array",
+                "description": "array tags",
+                "example": ["Eclipse", "Android Studio", "visual Studio Code"]
+            },
+
+            "Tool": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "$ref": "#/components/schemas/id"
+                    },
+                    "title": {
+                        "$ref": "#/components/schemas/title"
+                    },
+                    "link": {
+                        "$ref": "#/components/schemas/link"
+                    },
+                    "description": {
+                        "$ref": "#/components/schemas/description"
+                    },
+                    "tags": {
+                        "$ref": "#/components/schemas/tags"
+                    }
+                }
+            }
+        }
+    },
+    "paths": {
+        "/tools": {
+            "get": {
+                "tags": [
+                    "CRUD operations"
+                ],
+                "description": "Get tools",
+                "operationId": "tools",
+                "responses": {
+                    "200": {
+                        "description": "Tools were obtained",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tool"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing parameters",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tool"
+                                },
+                                "example": {
+                                    "message": "companyId is missing",
+                                    "internal_code": "missing_parameters"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

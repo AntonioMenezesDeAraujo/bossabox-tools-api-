@@ -12,14 +12,14 @@ module.exports = {
 
     async index(req, res) {
         const tools = await Tool.findAll();
-        return res.json(tools);
+        return res.status(200).json(tools);
     },
 
     async findByTag(req, res) {
         const { query } = req;
         const tagSearch = query.tag.split(',').map(m => "" + m);
         const tools = await Tool.findAll({ where: { tags: { [Op.contains]: [tagSearch] } } })
-        return res.json(tools);
+        return res.status(200).json(tools);
     },
 
     remove(req, res) {
